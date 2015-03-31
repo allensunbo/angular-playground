@@ -1,0 +1,22 @@
+<div class="pull-right col-md-11">
+   <div>{{selectedDate}}
+      <button ng-click="open()">open date picker</button>
+   </div>
+   <div ng-switch="mode">
+      <div ng-switch-when="show" style="height:100%; border:1px solid red;">
+         <!--remember dt is on parent scope!-->
+         <datepicker ng-model="$parent.dt[0]" show-weeks="false" class="col-md-3 "></datepicker>
+         <datepicker ng-model="$parent.dt[1]" show-weeks="false" class="col-md-3"></datepicker>
+         <datepicker ng-model="$parent.dt[2]" show-weeks="false" class="col-md-3"></datepicker>
+         <datepicker ng-model="$parent.dt[3]" show-weeks="false" class="col-md-3 "></datepicker>
+         <datepicker ng-model="$parent.dt[4]" show-weeks="false" class="col-md-3"></datepicker>
+         <datepicker ng-model="$parent.dt[5]" show-weeks="false" class="col-md-3"></datepicker>
+         <datepicker ng-model="$parent.dt[6]" show-weeks="false" class="col-md-3 "></datepicker>
+         <datepicker ng-model="$parent.dt[7]" show-weeks="false" class="col-md-3"></datepicker>
+         <datepicker ng-model="$parent.dt[8]" show-weeks="false" class="col-md-3"></datepicker>
+         <datepicker ng-model="$parent.dt[9]" show-weeks="false" class="col-md-3 "></datepicker>
+         <datepicker ng-model="$parent.dt[10]" show-weeks="false" class="col-md-3"></datepicker>
+         <datepicker ng-model="$parent.dt[11]" show-weeks="false" class="col-md-3"></datepicker>
+      </div>
+   </div>
+</div>
