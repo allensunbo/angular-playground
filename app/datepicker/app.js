@@ -6,9 +6,11 @@ angular.module('app', ['ui.bootstrap'])
          return null;
       });
 
+      var today = new Date();
+      $scope.selectedDate = formatDate(today);
+
       $scope.open = function () {
          $scope.mode = $scope.mode === 'hide' ? 'show' : 'hide';
-         var today = new Date();
          $scope.dt[0] = today;
          for (var i = 1; i < TWELVE; i++) {
             var current = new Date(today.getFullYear(), today.getMonth() + i, 1);
