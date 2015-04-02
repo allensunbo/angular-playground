@@ -33,8 +33,10 @@
 </head>
 <body ng-app="app">
 <div ng-controller="MainCtrl">
+   <span class="toggle collapse"></span>
+   <span class="toggle expand"></span>
    <div id="myGrid" style="width:600px;height:500px;"></div>
-   <slickgrid config="config" data="data"/>
+   <slickgrid config="config" data="data" dataview="dataView"/>
 
 
 </div>

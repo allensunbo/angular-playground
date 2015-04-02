@@ -1,5 +1,7 @@
 angular.module('app', [])
    .controller('MainCtrl', function ($scope) {
+      $scope.dataView = new Slick.Data.DataView({inlineFilters: true});
+
       var data = $scope.data = [];
       (function () {
          var indent = 0;
@@ -22,8 +24,8 @@ angular.module('app', [])
                parent = null;
             }
             d['id'] = 'id_' + i;
-            d['indent'] = indent;
-            d['parent'] = parent;
+            d['indent'] = i % 2 == 1 ? 1 : 0;
+            d['parent'] = i % 2 == 1 ? 'id_' + (i - 1) : null;
             d['title'] = 'Task ' + i;
             d['duration'] = '5 days';
             d['percentComplete'] = Math.round(Math.random() * 100);
@@ -35,7 +37,7 @@ angular.module('app', [])
 
       var TaskNameFormatter = function (row, cell, value, columnDef, dataContext) {
          value = value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-         var spacer = '<span style="display:inline-block;height:1px;width:" + (15 * dataContext["indent"]) + "px"></span>';
+         var spacer = '<span style="display:inline-block;height:1px;width:' + (15 * dataContext['indent']) + 'px"></span>';
          var idx = $scope.dataView.getIdxById(dataContext.id);
          if (data[idx + 1] && data[idx + 1].indent > data[idx].indent) {
             if (dataContext._collapsed) {
@@ -63,7 +65,7 @@ angular.module('app', [])
             field: 'title',
             width: 220,
             cssClass: 'cell-title',
-            // formatter: TaskNameFormatter,
+            formatter: TaskNameFormatter,
             editor: Slick.Editors.Text,
             validator: requiredFieldValidator
          },
@@ -110,7 +112,8 @@ angular.module('app', [])
          restrict: 'EA',
          scope: {
             config: '=',
-            data: '='
+            data: '=',
+            dataView: '=dataview'
          },
          // priority: 0,
          templateUrl: 'slickgrid.tpl.html',
@@ -123,7 +126,6 @@ angular.module('app', [])
 
 
             // initialize the model
-            scope.dataView = new Slick.Data.DataView({inlineFilters: true});
             scope.dataView.beginUpdate();
             scope.dataView.setItems(scope.data);
             // scope.dataView.setFilter(myFilter);
@@ -133,6 +135,22 @@ angular.module('app', [])
             grid.onCellChange.subscribe(function (e, args) {
                scope.dataView.updateItem(args.item.id, args.item);
             });
+
+            grid.onAddNewRow.subscribe(function (e, args) {
+               var item = {
+                  "id": "new_" + (Math.round(Math.random() * 10000)),
+                  "indent": 0,
+                  "title": "New task",
+                  "duration": "1 day",
+                  "percentComplete": 0,
+                  "start": "01/01/2009",
+                  "finish": "01/01/2009",
+                  "effortDriven": false
+               };
+               $.extend(item, args.item);
+               scope.dataView.addItem(item);
+            });
+
 
             grid.onClick.subscribe(function (e, args) {
                if ($(e.target).hasClass('toggle')) {
