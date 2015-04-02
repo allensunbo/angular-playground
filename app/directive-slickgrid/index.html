@@ -4,23 +4,28 @@
    <meta charset="UTF-8">
    <title></title>
    <link rel="stylesheet" href="../../bower_components/slickgrid/slick.grid.css" type="text/css"/>
-   <link rel="stylesheet" href="../../bower_components/slickgrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
+   <link rel="stylesheet" href="../../bower_components/slickgrid/css/smoothness/jquery-ui-1.8.16.custom.css"
+         type="text/css"/>
    <link rel="stylesheet" href="main.css" type="text/css"/>
    <style>
       .cell-title {
          font-weight: bold;
       }
+
       .cell-effort-driven {
          text-align: center;
       }
+
       .toggle {
          height: 9px;
          width: 9px;
          display: inline-block;
       }
+
       .toggle.expand {
          background: url(../../bower_components/slickgrid/images/expand.gif) no-repeat center center;
       }
+
       .toggle.collapse {
          background: url(../../bower_components/slickgrid/images/collapse.gif) no-repeat center center;
       }
@@ -29,7 +34,7 @@
 <body ng-app="app">
 <div ng-controller="MainCtrl">
    <div id="myGrid" style="width:600px;height:500px;"></div>
-   <slickgrid/>
+   <slickgrid config="config" data="data"/>
 
 
 </div>
